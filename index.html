@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おにぎり屋さんゲーム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="instructions">
+        <p>お客さんの注文通りにおにぎりを提供するアプリです</p>
+        <p>間違えると閉店します</p>
+        <p>たくさんのお客さんに美味しいおにぎりを食べてもらいましょう！</p>
+        <button id="start">開店</button>
+    </div>
+
+    <div id="game" style="display: none;">
+        <p id="greeting">いらっしゃいませ！</p>
+        <div id="order"></div>
+        <div id="onigiris">
+            <!-- おにぎりの要素をここに追加します -->
+            <div id="onigiris">
+              <!-- JavaScriptでおにぎりの要素を動的に追加 -->
+            </div>
+        </div>
+        <button id="submitOrder">渡す</button>
+        <p id="message"></p>
+        <p id="total">売り上げ: ¥0</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
