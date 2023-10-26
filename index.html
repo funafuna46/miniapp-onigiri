@@ -16,6 +16,7 @@
 
     <div id="game" style="display: none;">
         <p id="greeting">いらっしゃいませ！</p>
+        <div id="message" style="display: none;"></div>
         <div id="order"></div>
         <div id="onigiris">
             <!-- おにぎりの要素をここに追加します -->
@@ -23,10 +24,15 @@
               <!-- JavaScriptでおにぎりの要素を動的に追加 -->
             </div>
         </div>
-        <button id="submitOrder">渡す</button>
+        <button id="submitOnigiri">お渡し</button>
         <p id="message"></p>
-        <p id="total">売り上げ: ¥0</p>
     </div>
+
+    <div id="gameOverPopup" style="display: none;">
+      <p id="gameOverMessage"></p>
+      <button id="postToX">Xに投稿</button>
+      <button id="playAgain">もう一度</button>
+  </div>
 
     <script src="script.js"></script>
 </body>
