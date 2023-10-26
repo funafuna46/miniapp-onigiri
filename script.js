@@ -11,9 +11,12 @@ const onigiriData = [
   // 必要に応じて他のおにぎりのデータも追加
 ];
 
-document.getElementById("start").addEventListener("click", startGame);
-
+let totalSales = 0; // 合計売り上げ金額
+const pricePerOnigiri = 100; // 1つのおにぎりの価格
 let currentOrderCount = 3;  // 初めの注文数
+let currentOrder = {};  // 注文を格納する変数
+
+document.getElementById("start").addEventListener("click", startGame);
 
 function generateOrder(count) {
   const orderCounts = {};
@@ -27,6 +30,8 @@ function generateOrder(count) {
       }
       orderCounts[label]++;
   }
+
+  currentOrder = orderCounts;  // 注文内容を currentOrder に保存
 
   const orders = [];
   for (const [label, count] of Object.entries(orderCounts)) {
@@ -59,10 +64,55 @@ function startGame() {
   currentOrderCount++;  // 次の注文のために注文数を増やす
 }
 
+function checkOrder() {
+  for (const [label, count] of Object.entries(currentOrder)) {
+      if (!onigiriCounts[label] || onigiriCounts[label] !== count) {
+          gameOver();
+          return;
+      }
+  }
+  thankYou();
+}
 
+function thankYou() {
+  totalSales += (currentOrderCount - 1) * pricePerOnigiri;
 
-// 他のゲームの機能やロジックをこの下に追加する
-// ...（上部のコードは変更なし）
+  const messageDiv = document.getElementById("message");
+  messageDiv.textContent = "ありがとうございました！";
+  messageDiv.style.display = "block";  // メッセージを表示
+
+  // 2秒後にメッセージを非表示にしてゲームを再開する
+  setTimeout(() => {
+      messageDiv.style.display = "none";  // メッセージを非表示にする
+      startGame();
+  }, 2000);
+}
+
+function gameOver() {
+  const gameOverPopup = document.getElementById("gameOverPopup");
+  const gameOverMessage = document.getElementById("gameOverMessage");
+  const postToXButton = document.getElementById("postToX");
+  const playAgainButton = document.getElementById("playAgain");
+
+  gameOverMessage.textContent = `閉店です\n本日の売り上げ: ${totalSales}円`;
+
+  postToXButton.addEventListener("click", function() {
+      // Xへの投稿処理（実際の実装は依存します）
+      // 例: postToXFunction();
+      gameOverPopup.style.display = "none"; // 任意：投稿後にポップアップを非表示にする場合
+  });
+
+  playAgainButton.addEventListener("click", function() {
+      // ゲーム再開処理
+      startGame();
+      gameOverPopup.style.display = "none";
+  });
+
+  gameOverPopup.style.display = "block";
+}
+
+// おにぎりを渡すボタンのイベントを追加
+document.getElementById("submitOnigiri").addEventListener("click", checkOrder);
 
 const onigiriCounts = {};
 
