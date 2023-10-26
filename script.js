@@ -48,7 +48,7 @@ function startGame() {
   // 1秒後に「いらっしゃいませ！」メッセージを消し、注文を表示
   setTimeout(() => {
       document.getElementById("greeting").textContent = "";
-      orderDiv.textContent = orders.join(", ") + "ください。";
+      orderDiv.textContent = orders.join("、 ") + "ください。";
 
       // さらに5秒後に注文内容を消す
       setTimeout(() => {
@@ -62,6 +62,10 @@ function startGame() {
 
 
 // 他のゲームの機能やロジックをこの下に追加する
+// ...（上部のコードは変更なし）
+
+const onigiriCounts = {};
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const onigirisContainer = document.getElementById('onigiris');
@@ -75,12 +79,50 @@ document.addEventListener('DOMContentLoaded', function() {
       img.alt = 'おにぎり';
       img.className = 'onigiri';
 
+      // 追加：おにぎりをクリックした時のイベント
+      img.addEventListener('click', function() {
+          if (!onigiriCounts[onigiri.label]) {
+              onigiriCounts[onigiri.label] = 0;
+          }
+          onigiriCounts[onigiri.label]++;
+          countSpan.textContent = onigiriCounts[onigiri.label];
+
+          // カウントとマイナスボタンを表示にする
+          countSpan.style.display = 'inline';
+          minusButton.style.display = 'inline';
+      });
+
       const label = document.createElement('span');
       label.className = 'label';
       label.textContent = onigiri.label;
 
+      // 追加：カウントを表示するエレメント（初めは非表示）
+      const countSpan = document.createElement('span');
+      countSpan.className = 'count';
+      countSpan.textContent = onigiriCounts[onigiri.label] || 0;
+      countSpan.style.display = 'none';  // 非表示に設定
+
+      // 追加：マイナスボタンのエレメント（初めは非表示）
+      const minusButton = document.createElement('button');
+      minusButton.textContent = '-';
+      minusButton.style.display = 'none';  // 非表示に設定
+      minusButton.addEventListener('click', function() {
+          if (onigiriCounts[onigiri.label] > 0) {
+              onigiriCounts[onigiri.label]--;
+              countSpan.textContent = onigiriCounts[onigiri.label];
+              // カウントが0になったら再び非表示にする
+              if (onigiriCounts[onigiri.label] === 0) {
+                  countSpan.style.display = 'none';
+                  minusButton.style.display = 'none';
+              }
+          }
+      });
+
       container.appendChild(img);
       container.appendChild(label);
+      container.appendChild(countSpan);
+      container.appendChild(minusButton);
       onigirisContainer.appendChild(container);
   });
 });
+
