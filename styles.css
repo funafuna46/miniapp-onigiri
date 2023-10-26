@@ -1,0 +1,27 @@
+/* ここにスタイルを追加 */
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.onigiri {
+  width: 50px; /* 20pxだと少し小さかったので、50pxに変更してみました */
+  cursor: pointer;
+}
+
+.label {
+  display: block;
+  margin-top: 5px;
+}
+
+#onigiris {
+  display: flex;
+  flex-wrap: wrap;  /* 要素を折り返す */
+  justify-content: center; /* 中央寄せ */
+}
+
+.onigiri-container {
+  flex: 0 0 33.33%;  /* 3列になるように指定 */
+  max-width: 33.33%; /* 3列になるように指定 */
+  box-sizing: border-box; /* ボーダーやパディングを含めたサイズに */
+}
