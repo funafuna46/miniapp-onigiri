@@ -77,6 +77,8 @@ function startGame() {
   // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
   setTimeout(() => {
     orderContentDiv.textContent = "";
+    const orderBubbleElement = document.getElementById("order-bubble");
+    orderBubbleElement.style.display = "none"; // 吹き出しを非表示にする
   }, (currentOrderCount + 1) * 1000);
   }, 1000);  // 1秒後に実行
 }
