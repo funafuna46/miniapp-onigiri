@@ -52,3 +52,19 @@ body {
   display: block;
   width: 100%;
 }
+
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* ホバーエフェクト */
+button:hover {
+  background-color: #7e95ae; /* 若干明るい色 */
+  transform: scale(1.05); /* 少し大きく */
+}
+
