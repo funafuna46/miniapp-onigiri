@@ -63,23 +63,26 @@ function startGame() {
 
   // 注文を生成
   const orders = generateOrder(currentOrderCount);
-  const orderDiv = document.getElementById("order");
+  const orderContentDiv = document.getElementById("order-content");
 
   // 1秒後に「いらっしゃいませ！」メッセージを消し、注文を表示
   setTimeout(() => {
     const greetingElement = document.getElementById("greeting");
-      greetingElement.style.display = "none";
-      orderDiv.textContent = orders.join("、 ") + "ください。";
+    const orderBubbleElement = document.getElementById("order-bubble");
+
+    greetingElement.style.display = "none";
+    orderBubbleElement.style.display = "block";
+    orderContentDiv.textContent = orders.join("、 ") + "ください。";
 
   // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
   setTimeout(() => {
-    orderDiv.textContent = "";
+    orderContentDiv.textContent = "";
   }, (currentOrderCount + 1) * 1000);
   }, 1000);  // 1秒後に実行
 }
 
 function checkOrder() {
-  document.getElementById("order").textContent = "";  // 注文内容をクリア
+  document.getElementById("order-content").textContent = "";  // 注文内容をクリア
   for (const [label, count] of Object.entries(currentOrder)) {
       if (!onigiriCounts[label] || onigiriCounts[label] !== count) {
           gameOver();

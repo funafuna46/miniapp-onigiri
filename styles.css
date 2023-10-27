@@ -92,3 +92,27 @@ button:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+#order-bubble {
+  position: relative;
+  display: none;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #f5f5f5;  /* 吹き出しの背景色と同じ色にします */
+  position: absolute;
+  right: -10px;  /* 吹き出しの右側に三角形を配置 */
+  top: 50%;  /* 上から中央に三角形を配置 */
+  transform: translateY(-50%);  /* Y軸方向の中央揃え */
+}
