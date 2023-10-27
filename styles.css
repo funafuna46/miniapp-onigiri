@@ -26,6 +26,13 @@ body {
   box-sizing: border-box; /* ボーダーやパディングを含めたサイズに */
 }
 
+#onigiriShopImage {
+  width: 100%; /* 画像の幅を調整 */
+  max-width: 400px; /* 画像の最大幅を設定 */
+  margin: 0 auto; /* 画像を中央に配置 */
+  display: block; /* 画像をブロック要素として表示 */
+}
+
 #gameOverPopup {
   position: fixed;
   top: 50%;
