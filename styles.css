@@ -16,14 +16,16 @@ body {
 
 #onigiris {
   display: flex;
-  flex-wrap: wrap;  /* 要素を折り返す */
-  justify-content: center; /* 中央寄せ */
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 450px; /* 3つのonigiri-containerの合計幅 (150px * 3) */
+  margin: 0 auto; /* 上下には余白を持たせず、左右は自動で余白を持たせて中央寄せにします */
 }
 
 .onigiri-container {
-  flex: 0 0 33.33%;  /* 3列になるように指定 */
-  max-width: 33.33%; /* 3列になるように指定 */
-  box-sizing: border-box; /* ボーダーやパディングを含めたサイズに */
+  flex: 0 0 150px;  /* 固定の幅を指定 */
+  max-width: 150px; /* 固定の幅を指定 */
+  box-sizing: border-box;
 }
 
 #onigiriShopImage {
