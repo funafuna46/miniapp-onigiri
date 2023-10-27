@@ -67,7 +67,8 @@ function startGame() {
 
   // 1秒後に「いらっしゃいませ！」メッセージを消し、注文を表示
   setTimeout(() => {
-      document.getElementById("greeting").textContent = "";
+    const greetingElement = document.getElementById("greeting");
+      greetingElement.style.display = "none";
       orderDiv.textContent = orders.join("、 ") + "ください。";
 
   // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
