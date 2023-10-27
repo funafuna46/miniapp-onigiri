@@ -116,3 +116,14 @@ button:hover {
   top: 50%;  /* 上から中央に三角形を配置 */
   transform: translateY(-50%);  /* Y軸方向の中央揃え */
 }
+
+.rounded-button {
+  display: none;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 15px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0;
+}

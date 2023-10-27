@@ -176,7 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 追加：マイナスボタンのエレメント（初めは非表示）
       const minusButton = document.createElement('button');
       minusButton.textContent = '-';
-      minusButton.style.display = 'none';  // 非表示に設定
+      minusButton.classList.add('rounded-button');
+
       minusButton.addEventListener('click', function() {
           if (onigiriCounts[onigiri.label] > 0) {
               onigiriCounts[onigiri.label]--;
