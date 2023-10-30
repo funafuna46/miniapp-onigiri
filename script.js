@@ -41,44 +41,61 @@ function generateOrder(count) {
   return orders;
 }
 
+function hideInstructions() {
+  document.getElementById("instructions").style.display = "none";
+}
+
+function showGame() {
+  document.getElementById("game").style.display = "block";
+}
+
+function resetOnigiriCounts() {
+  for (const onigiri of onigiriData) {
+    onigiriCounts[onigiri.label] = 0;
+    const containers = document.querySelectorAll('.onigiri-container');
+    containers.forEach(container => {
+        if (container.querySelector('.label').textContent === onigiri.label) {
+            const countSpan = container.querySelector('.count');
+            const minusButton = container.querySelector('button');
+            countSpan.textContent = 0;
+            countSpan.style.visibility = 'hidden';  // カウントを非表示に
+            minusButton.style.visibility = 'hidden'; // マイナスボタンを非表示に
+        }
+    });
+}
+}
+
+function showGreeting() {
+  const greetingElement = document.getElementById("greeting");
+  greetingElement.style.visibility = "visible";
+}
+
+function hideGreeting() {
+  const greetingElement = document.getElementById("greeting");
+  greetingElement.style.visibility = "hidden";
+}
+
+function showOrder(orders) {
+  const orderContentDiv = document.getElementById("order-content");
+  orderContentDiv.textContent = orders.join("、 ") + "ください。";
+}
 
 function startGame() {
-  document.getElementById("instructions").style.display = "none";
-  document.getElementById("game").style.display = "block";
+  hideInstructions();
+  showGame();
+  resetOnigiriCounts();
+  showGreeting();
 
-      // おにぎりのカウントをリセット
-      for (const onigiri of onigiriData) {
-        onigiriCounts[onigiri.label] = 0;
-        const containers = document.querySelectorAll('.onigiri-container');
-        containers.forEach(container => {
-            if (container.querySelector('.label').textContent === onigiri.label) {
-                const countSpan = container.querySelector('.count');
-                const minusButton = container.querySelector('button');
-                countSpan.textContent = 0;
-                countSpan.style.display = 'none';  // カウントを非表示に
-                minusButton.style.display = 'none'; // マイナスボタンを非表示に
-            }
-        });
-    }
-
-  // 注文を生成
-  const orders = generateOrder(currentOrderCount);
-  const orderDiv = document.getElementById("order");
-
-  // 1秒後に「いらっしゃいませ！」メッセージを消し、注文を表示
   setTimeout(() => {
-      document.getElementById("greeting").textContent = "";
-      orderDiv.textContent = orders.join("、 ") + "ください。";
+      hideGreeting();
 
-  // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
-  setTimeout(() => {
-    orderDiv.textContent = "";
-  }, (currentOrderCount + 1) * 1000);
-  }, 1000);  // 1秒後に実行
+      const orders = generateOrder(currentOrderCount);
+      showOrder(orders);
+  }, 1000);
 }
 
 function checkOrder() {
-  document.getElementById("order").textContent = "";  // 注文内容をクリア
+  document.getElementById("order-content").textContent = "";  // 注文内容をクリア
   for (const [label, count] of Object.entries(currentOrder)) {
       if (!onigiriCounts[label] || onigiriCounts[label] !== count) {
           gameOver();
@@ -89,44 +106,46 @@ function checkOrder() {
 }
 
 function thankYou() {
-  totalSales += (currentOrderCount - 1) * pricePerOnigiri;
+  totalSales += currentOrderCount * pricePerOnigiri;
 
   const messageDiv = document.getElementById("message");
-  messageDiv.textContent = "ありがとうございました！";
-  messageDiv.style.display = "block";  // メッセージを表示
+  messageDiv.style.visibility = "visible";  // メッセージを表示
 
   // 2秒後にメッセージを非表示にしてゲームを再開する
   setTimeout(() => {
-      messageDiv.style.display = "none";  // メッセージを非表示にする
+      messageDiv.style.visibility = "hidden";  // メッセージを非表示にする
       currentOrderCount++;  // 正しい注文が提供された後に注文数を増加させる
       startGame();
   }, 2000);
 }
 
+function updateTwitterLink() {
+  const twitterLink = document.getElementById("twitterLink");
+  const tweetText = encodeURIComponent(`おにぎり屋さんゲーム\n本日の売り上げ: ${totalSales}円\nパソコンから遊んでね`);
+  const tweetURL = `https://twitter.com/intent/tweet?&text=${tweetText}&url=https://warm-trifle-5266cb.netlify.app/`;
+  twitterLink.href = tweetURL;
+}
+
 function gameOver() {
-  currentOrderCount = 3;  // ゲームオーバー時に注文数をリセット
+  currentOrderCount = 3;
 
   const gameOverPopup = document.getElementById("gameOverPopup");
   const gameOverMessage = document.getElementById("gameOverMessage");
-  const postToXButton = document.getElementById("postToX");
   const playAgainButton = document.getElementById("playAgain");
 
   gameOverMessage.textContent = `閉店です\n本日の売り上げ: ${totalSales}円`;
 
-  postToXButton.addEventListener("click", function() {
-      // Xへの投稿処理（実際の実装は依存します）
-      // 例: postToXFunction();
-      gameOverPopup.style.display = "none"; // 任意：投稿後にポップアップを非表示にする場合
-  });
+  updateTwitterLink();  // ツイッターリンクを更新
 
   playAgainButton.addEventListener("click", function() {
-      // ゲーム再開処理
+      totalSales = 0;
       startGame();
       gameOverPopup.style.display = "none";
   });
 
   gameOverPopup.style.display = "block";
 }
+
 
 // おにぎりを渡すボタンのイベントを追加
 document.getElementById("submitOnigiri").addEventListener("click", checkOrder);
@@ -155,8 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
           countSpan.textContent = onigiriCounts[onigiri.label];
 
           // カウントとマイナスボタンを表示にする
-          countSpan.style.display = 'inline';
-          minusButton.style.display = 'inline';
+          countSpan.style.visibility = 'visible';
+          minusButton.style.visibility = 'visible';
       });
 
       const label = document.createElement('span');
@@ -167,20 +186,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const countSpan = document.createElement('span');
       countSpan.className = 'count';
       countSpan.textContent = onigiriCounts[onigiri.label] || 0;
-      countSpan.style.display = 'none';  // 非表示に設定
+      countSpan.style.visibility = 'hidden';  // 非表示に設定
 
       // 追加：マイナスボタンのエレメント（初めは非表示）
       const minusButton = document.createElement('button');
       minusButton.textContent = '-';
-      minusButton.style.display = 'none';  // 非表示に設定
+      minusButton.classList.add('rounded-button');
+
       minusButton.addEventListener('click', function() {
           if (onigiriCounts[onigiri.label] > 0) {
               onigiriCounts[onigiri.label]--;
               countSpan.textContent = onigiriCounts[onigiri.label];
               // カウントが0になったら再び非表示にする
               if (onigiriCounts[onigiri.label] === 0) {
-                  countSpan.style.display = 'none';
-                  minusButton.style.display = 'none';
+                  countSpan.style.visibility = 'hidden';
+                  minusButton.style.visibility = 'hidden';
               }
           }
       });

@@ -16,14 +16,23 @@ body {
 
 #onigiris {
   display: flex;
-  flex-wrap: wrap;  /* 要素を折り返す */
-  justify-content: center; /* 中央寄せ */
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 450px; /* 3つのonigiri-containerの合計幅 (150px * 3) */
+  margin: 0 auto; /* 上下には余白を持たせず、左右は自動で余白を持たせて中央寄せにします */
 }
 
 .onigiri-container {
-  flex: 0 0 33.33%;  /* 3列になるように指定 */
-  max-width: 33.33%; /* 3列になるように指定 */
-  box-sizing: border-box; /* ボーダーやパディングを含めたサイズに */
+  flex: 0 0 150px;  /* 固定の幅を指定 */
+  max-width: 150px; /* 固定の幅を指定 */
+  box-sizing: border-box;
+}
+
+#onigiriShopImage {
+  width: 100%; /* 画像の幅を調整 */
+  max-width: 400px; /* 画像の最大幅を設定 */
+  margin: 0 auto; /* 画像を中央に配置 */
+  display: block; /* 画像をブロック要素として表示 */
 }
 
 #gameOverPopup {
@@ -44,4 +53,84 @@ body {
   margin-top: 10px;
   display: block;
   width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* ホバーエフェクト */
+button:hover {
+  background-color: #7e95ae; /* 若干明るい色 */
+  transform: scale(1.05); /* 少し大きく */
+}
+
+#greeting {
+  display: inline-block;
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  visibility: visible;
+}
+
+#message {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: block;
+  max-width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  visibility: hidden;
+}
+
+#order-bubble {
+  min-height: 50px;
+  position: relative;
+  visibility: visible;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #f5f5f5;  /* 吹き出しの背景色と同じ色にします */
+  position: absolute;
+  right: -10px;  /* 吹き出しの右側に三角形を配置 */
+  top: 50%;  /* 上から中央に三角形を配置 */
+  transform: translateY(-50%);  /* Y軸方向の中央揃え */
+}
+
+.rounded-button {
+  visibility: visible;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 15px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0;
 }

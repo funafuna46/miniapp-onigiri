@@ -8,31 +8,35 @@
 </head>
 <body>
     <div id="instructions">
+      <img src="images/onigiri_shop.png" alt="おにぎり屋さん" id="onigiriShopImage">
         <p>お客さんの注文通りにおにぎりを提供するアプリです</p>
         <p>間違えると閉店します</p>
         <p>たくさんのお客さんに美味しいおにぎりを食べてもらいましょう！</p>
         <button id="start">開店</button>
     </div>
 
-    <div id="game" style="display: none;">
-        <p id="greeting">いらっしゃいませ！</p>
-        <div id="message" style="display: none;"></div>
-        <div id="order"></div>
-        <div id="onigiris">
-            <!-- おにぎりの要素をここに追加します -->
-            <div id="onigiris">
-              <!-- JavaScriptでおにぎりの要素を動的に追加 -->
-            </div>
-        </div>
-        <button id="submitOnigiri">お渡し</button>
-        <p id="message"></p>
+    <div id="game" class="hidden">
+      <p id="greeting">いらっしゃいませ！</p>
+      <div id="order-bubble">
+        <div id="order-content"></div>
+        <div class="triangle"></div>
+      </div>
+      <div id="onigiris">
+        <!-- JavaScriptでおにぎりの要素を動的に追加 -->
+      </div>
+      <button id="submitOnigiri">お渡し</button>
+      <p id="message">ありがとうございました！</p>
     </div>
 
-    <div id="gameOverPopup" style="display: none;">
+    <div id="gameOverPopup" class="hidden">
       <p id="gameOverMessage"></p>
-      <button id="postToX">Xに投稿</button>
+      <a
+      id="twitterLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><button id="postToTwitter">Xに投稿</button></a>
       <button id="playAgain">もう一度</button>
-  </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
