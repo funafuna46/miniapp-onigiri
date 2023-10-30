@@ -119,24 +119,25 @@ function thankYou() {
   }, 2000);
 }
 
+function updateTwitterLink() {
+  const twitterLink = document.getElementById("twitterLink");
+  const tweetText = encodeURIComponent(`おにぎり屋さんゲーム\n本日の売り上げ: ${totalSales}円\nパソコンから遊んでね`);
+  const tweetURL = `https://twitter.com/intent/tweet?&text=${tweetText}&url=https://warm-trifle-5266cb.netlify.app/`;
+  twitterLink.href = tweetURL;
+}
+
 function gameOver() {
-  currentOrderCount = 3;  // ゲームオーバー時に注文数をリセット
+  currentOrderCount = 3;
 
   const gameOverPopup = document.getElementById("gameOverPopup");
   const gameOverMessage = document.getElementById("gameOverMessage");
-  const postToXButton = document.getElementById("postToX");
   const playAgainButton = document.getElementById("playAgain");
 
   gameOverMessage.textContent = `閉店です\n本日の売り上げ: ${totalSales}円`;
 
-  postToXButton.addEventListener("click", function() {
-      // Xへの投稿処理（実際の実装は依存します）
-      // 例: postToXFunction();
-      gameOverPopup.style.display = "none"; // 任意：投稿後にポップアップを非表示にする場合
-  });
+  updateTwitterLink();  // ツイッターリンクを更新
 
   playAgainButton.addEventListener("click", function() {
-      // ゲーム再開処理
       totalSales = 0;
       startGame();
       gameOverPopup.style.display = "none";
@@ -144,6 +145,7 @@ function gameOver() {
 
   gameOverPopup.style.display = "block";
 }
+
 
 // おにぎりを渡すボタンのイベントを追加
 document.getElementById("submitOnigiri").addEventListener("click", checkOrder);
