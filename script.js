@@ -41,50 +41,57 @@ function generateOrder(count) {
   return orders;
 }
 
+function hideInstructions() {
+  document.getElementById("instructions").style.display = "none";
+}
 
-function startGame() {
+function showGame() {
+  document.getElementById("game").style.display = "block";
+}
+
+function resetOnigiriCounts() {
+  for (const onigiri of onigiriData) {
+    onigiriCounts[onigiri.label] = 0;
+    const containers = document.querySelectorAll('.onigiri-container');
+    containers.forEach(container => {
+        if (container.querySelector('.label').textContent === onigiri.label) {
+            const countSpan = container.querySelector('.count');
+            const minusButton = container.querySelector('button');
+            countSpan.textContent = 0;
+            countSpan.style.visibility = 'hidden';  // カウントを非表示に
+            minusButton.style.visibility = 'hidden'; // マイナスボタンを非表示に
+        }
+    });
+}
+}
+
+function showGreeting() {
   const greetingElement = document.getElementById("greeting");
   greetingElement.style.visibility = "visible";
-  document.getElementById("instructions").style.display = "none";
-  document.getElementById("game").style.display = "block";
+}
 
-      // おにぎりのカウントをリセット
-      for (const onigiri of onigiriData) {
-        onigiriCounts[onigiri.label] = 0;
-        const containers = document.querySelectorAll('.onigiri-container');
-        containers.forEach(container => {
-            if (container.querySelector('.label').textContent === onigiri.label) {
-                const countSpan = container.querySelector('.count');
-                const minusButton = container.querySelector('button');
-                countSpan.textContent = 0;
-                countSpan.style.visibility = 'hidden';  // カウントを非表示に
-                minusButton.style.visibility = 'hidden'; // マイナスボタンを非表示に
-            }
-        });
-    }
+function hideGreeting() {
+  const greetingElement = document.getElementById("greeting");
+  greetingElement.style.visibility = "hidden";
+}
 
-  // 注文を生成
-  const orders = generateOrder(currentOrderCount);
+function showOrder(orders) {
   const orderContentDiv = document.getElementById("order-content");
+  orderContentDiv.textContent = orders.join("、 ") + "ください。";
+}
 
-  // 1秒後に「いらっしゃいませ！」メッセージを消し、注文を表示
+function startGame() {
+  hideInstructions();
+  showGame();
+  resetOnigiriCounts();
+  showGreeting();
+
   setTimeout(() => {
-    const greetingElement = document.getElementById("greeting");
-    const orderBubbleElement = document.getElementById("order-bubble");
+      hideGreeting();
 
-    // visibilityをhiddenに設定して「いらっしゃいませ！」メッセージを非表示にする
-    greetingElement.style.visibility = "hidden";
-
-    // visibilityをvisibleに設定して注文バブルを表示する
-    orderBubbleElement.style.visibility = "visible";
-    orderContentDiv.textContent = orders.join("、 ") + "ください。";
-
-  // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
-  setTimeout(() => {
-    orderContentDiv.textContent = "";
-    orderBubbleElement.style.visibility = "hidden"; // 吹き出しを非表示にする
-  }, (currentOrderCount + 1) * 1000);
-  }, 1000);  // 1秒後に実行
+      const orders = generateOrder(currentOrderCount);
+      showOrder(orders);
+  }, 1000);
 }
 
 function checkOrder() {
