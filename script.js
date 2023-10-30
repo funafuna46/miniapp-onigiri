@@ -57,8 +57,8 @@ function startGame() {
                 const countSpan = container.querySelector('.count');
                 const minusButton = container.querySelector('button');
                 countSpan.textContent = 0;
-                countSpan.style.display = 'none';  // カウントを非表示に
-                minusButton.style.display = 'none'; // マイナスボタンを非表示に
+                countSpan.style.visibility = 'hidden';  // カウントを非表示に
+                minusButton.style.visibility = 'hidden'; // マイナスボタンを非表示に
             }
         });
     }
@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
           countSpan.textContent = onigiriCounts[onigiri.label];
 
           // カウントとマイナスボタンを表示にする
-          countSpan.style.display = 'inline';
-          minusButton.style.display = 'inline';
+          countSpan.style.visibility = 'visible';
+          minusButton.style.visibility = 'visible';
       });
 
       const label = document.createElement('span');
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const countSpan = document.createElement('span');
       countSpan.className = 'count';
       countSpan.textContent = onigiriCounts[onigiri.label] || 0;
-      countSpan.style.display = 'none';  // 非表示に設定
+      countSpan.style.visibility = 'hidden';  // 非表示に設定
 
       // 追加：マイナスボタンのエレメント（初めは非表示）
       const minusButton = document.createElement('button');
@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
               countSpan.textContent = onigiriCounts[onigiri.label];
               // カウントが0になったら再び非表示にする
               if (onigiriCounts[onigiri.label] === 0) {
-                  countSpan.style.display = 'none';
-                  minusButton.style.display = 'none';
+                  countSpan.style.visibility = 'hidden';
+                  minusButton.style.visibility = 'hidden';
               }
           }
       });
