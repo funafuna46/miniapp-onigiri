@@ -95,7 +95,7 @@ function checkOrder() {
 }
 
 function thankYou() {
-  totalSales += (currentOrderCount - 1) * pricePerOnigiri;
+  totalSales += currentOrderCount * pricePerOnigiri;
 
   const messageDiv = document.getElementById("message");
   messageDiv.textContent = "ありがとうございました！";
@@ -127,6 +127,7 @@ function gameOver() {
 
   playAgainButton.addEventListener("click", function() {
       // ゲーム再開処理
+      totalSales = 0;
       startGame();
       gameOverPopup.style.display = "none";
   });
