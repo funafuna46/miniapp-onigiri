@@ -43,6 +43,8 @@ function generateOrder(count) {
 
 
 function startGame() {
+  const greetingElement = document.getElementById("greeting");
+  greetingElement.style.visibility = "visible";
   document.getElementById("instructions").style.display = "none";
   document.getElementById("game").style.display = "block";
 
@@ -100,12 +102,11 @@ function thankYou() {
   totalSales += currentOrderCount * pricePerOnigiri;
 
   const messageDiv = document.getElementById("message");
-  messageDiv.textContent = "ありがとうございました！";
-  messageDiv.style.display = "block";  // メッセージを表示
+  messageDiv.style.visibility = "visible";  // メッセージを表示
 
   // 2秒後にメッセージを非表示にしてゲームを再開する
   setTimeout(() => {
-      messageDiv.style.display = "none";  // メッセージを非表示にする
+      messageDiv.style.visibility = "hidden";  // メッセージを非表示にする
       currentOrderCount++;  // 正しい注文が提供された後に注文数を増加させる
       startGame();
   }, 2000);
