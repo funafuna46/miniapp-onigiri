@@ -79,6 +79,7 @@ button:hover {
   border: 1px solid #ddd;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  visibility: visible;
 }
 
 #message {
@@ -93,11 +94,12 @@ button:hover {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  visibility: visible;
 }
 
 #order-bubble {
   position: relative;
-  display: none;
+  visibility: hidden;
   background-color: #f5f5f5;
   padding: 10px;
   border: none;

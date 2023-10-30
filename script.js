@@ -70,15 +70,17 @@ function startGame() {
     const greetingElement = document.getElementById("greeting");
     const orderBubbleElement = document.getElementById("order-bubble");
 
-    greetingElement.style.display = "none";
-    orderBubbleElement.style.display = "block";
+    // visibilityをhiddenに設定して「いらっしゃいませ！」メッセージを非表示にする
+    greetingElement.style.visibility = "hidden";
+
+    // visibilityをvisibleに設定して注文バブルを表示する
+    orderBubbleElement.style.visibility = "visible";
     orderContentDiv.textContent = orders.join("、 ") + "ください。";
 
   // さらに(おにぎりの個数 + 1)秒後に注文内容を消す
   setTimeout(() => {
     orderContentDiv.textContent = "";
-    const orderBubbleElement = document.getElementById("order-bubble");
-    orderBubbleElement.style.display = "none"; // 吹き出しを非表示にする
+    orderBubbleElement.style.visibility = "hidden"; // 吹き出しを非表示にする
   }, (currentOrderCount + 1) * 1000);
   }, 1000);  // 1秒後に実行
 }
