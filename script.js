@@ -99,7 +99,7 @@ function startGame() {
 
       clearOrderTimer = setTimeout(() => {
         document.getElementById("order-content").textContent = "";
-      }, currentOrderCount * 1000);
+      }, (currentOrderCount * 1000) - (currentOrderCount * 200));
 
   }, 1000);
 }
