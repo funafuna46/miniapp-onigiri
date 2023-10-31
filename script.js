@@ -15,6 +15,7 @@ let totalSales = 0; // 合計売り上げ金額
 const pricePerOnigiri = 200; // 1つのおにぎりの価格
 let currentOrderCount = 3;  // 初めの注文数
 let currentOrder = {};  // 注文を格納する変数
+let clearOrderTimer = null;
 
 document.getElementById("start").addEventListener("click", startGame);
 
@@ -91,6 +92,15 @@ function startGame() {
 
       const orders = generateOrder(currentOrderCount);
       showOrder(orders);
+
+      if (clearOrderTimer) {
+        clearTimeout(clearOrderTimer);
+      }
+
+      clearOrderTimer = setTimeout(() => {
+        document.getElementById("order-content").textContent = "";
+      }, (currentOrderCount * 1000) - (currentOrderCount * 200));
+
   }, 1000);
 }
 
