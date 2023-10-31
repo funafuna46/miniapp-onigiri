@@ -91,6 +91,11 @@ function startGame() {
 
       const orders = generateOrder(currentOrderCount);
       showOrder(orders);
+
+      setTimeout(() => {
+        document.getElementById("order-content").textContent = "";
+      }, currentOrderCount * 1000);
+
   }, 1000);
 }
 
